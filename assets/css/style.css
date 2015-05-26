@@ -1,7 +1,7 @@
 body {
     background-color: #242424;
     font-family: source-sans-pro, Helvetica, Arial, sans-serif, sans-serif;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 #top_menu {
@@ -32,5 +32,12 @@ body {
   position: absolute;
   margin-top: 80px;
   margin-left: 100px;
+  width: 80%;
+  height: 80%;
 }
 
+#jesse_video {
+  display: none;
+  position: absolute;
+  z-index: 100;
+}

@@ -29,31 +29,103 @@ function set_codebreaker_result(result){
   codebreaker_result.textContent = result;
 }
 
+function show_jessse(){
+  var jesse_video = $("#jesse_video");
+  var width = $(window).width();
+  var height = $(window).height();
+
+  var logoCenterX = width/2 - 317;
+  var logoCenterY = height/2 - 180;
+  
+  var bounce = new Bounce();
+  bounce.translate({
+    from: { x: -300, y: 0 },
+    to: { x: logoCenterX, y: logoCenterY },
+    duration: 600,
+    bounces: 4
+  }).scale({
+    from: { x: 1.0, y: 1.0 },
+    to: { x: 0.1, y: 2.3 },
+    duration: 800,
+    easing: "sway",
+    delay: 65,
+    bounces: 4
+  }).scale({
+    from: { x: 1.0, y: 1.0 },
+    to: { x: 5.0, y: 1.0 },
+    duration: 300,
+    easing: "sway",
+    delay: 30,
+    bounces: 4
+  });
+
+  jesse_video.show();
+  bounce.applyTo(jesse_video);
+
+  // Play video
+  var vid = document.getElementById("jesse_video");
+  vid.play();
+
+  // Hide video after 10 seconds
+  setTimeout(function(){
+    var bounce = new Bounce();
+    bounce.scale({
+      from: { x: 1.0, y: 1.0 },
+      to: { x: 0.1, y: 0.1 },
+      duration: 1000,
+      bounces: 3
+    });
+    bounce.applyTo(jesse_video).then(function(){
+      jesse_video.hide();
+    });
+  }, 10000);
+}
+
 function add_to_guess(number) {
   guess += number.toString();
   update_guess_code();
   
   if (guess.length == 4) {
     
-    if(guess == "1234") {
-      // Player won!
-      flash_led("#00ff00");
-      
-    }else{
-      // Player loss
-      flash_led("#ff0000");
-      show_saul();
-    }
-    
-    // Clear string
-    setTimeout(function(){
-      guess = "";
-      update_guess_code();
-    }, 600);
+    $.ajax({
+      url: "/guess/" + guess,
+      success: function(data){
+        set_codebreaker_result(data);
+
+        if (data == "++++") {
+          // Player won!
+          flash_led("#00ff00");
+
+          show_jessse();
+        } else if( data == "No available attempts.") {
+          show_saul();
+          flash_led("#ff0000");
+        } else {
+          flash_led("#ff0000");
+        }
+
+        // Clear string
+        setTimeout(function(){
+          guess = "";
+          update_guess_code();
+        }, 600);
+
+      }
+    });
     
   }
   
 }
+
+function show_hint(){
+  $.ajax({
+    url: "/hint",
+    success: function(data){
+      set_codebreaker_result(data);
+    }
+  })
+}
+
 
 function init_buttons(){
   var buttons = $("#safe").contents().find('[id^="button"]');
@@ -70,7 +142,7 @@ function init_buttons(){
       add_to_guess(buttonNumber);
     }else{
       // Seems hint button was pressed
-      console.log("hint");
+      show_hint();
     }
     
   });
@@ -170,7 +242,7 @@ function show_saul() {
   bounce.applyTo(saul).then(function(){
     setTimeout(function(){
       hide_saul();
-    }, 3000);
+    }, 4000);
   });
 }
 
