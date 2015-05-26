@@ -1,0 +1,36 @@
+body {
+    background-color: #242424;
+    font-family: source-sans-pro, Helvetica, Arial, sans-serif, sans-serif;
+    overflow: hidden;
+}
+
+#top_menu {
+  height: 100px;
+  background-color: #ff0000;
+}
+
+#logo {
+  display: none;
+  position: absolute;
+  width: 383px;
+  height: 55px;
+  margin-top: 20px;
+  margin-right: 40px;
+}
+
+#saul {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 250px;
+  height: 184px;
+}
+
+#safe {
+  display: none;
+  position: absolute;
+  margin-top: 80px;
+  margin-left: 100px;
+}
+
