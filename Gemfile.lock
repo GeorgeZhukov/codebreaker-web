@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/GeorgeZhukov/codebreaker.git
-  revision: 598a3681257e668bb73e0d300cb640c09bc50b67
+  revision: f8639356cf362d631626beaef35fd86fd9d1a021
   specs:
     codebreaker (0.1.0)
 
