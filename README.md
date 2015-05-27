@@ -17,4 +17,7 @@ http://www.youtube.com/user/c9ide.
 Happy coding!
 The Cloud9 IDE team
 
-Web interface written on Rake for code breaker gem.
+Codebreaker
+===========
+Web interface written on Rake for code breaker (https://github.com/GeorgeZhukov/codebreaker "gem")
+
