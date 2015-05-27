@@ -7,7 +7,21 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    diff-lcs (1.2.5)
     rack (1.6.1)
+    rspec (3.2.0)
+      rspec-core (~> 3.2.0)
+      rspec-expectations (~> 3.2.0)
+      rspec-mocks (~> 3.2.0)
+    rspec-core (3.2.3)
+      rspec-support (~> 3.2.0)
+    rspec-expectations (3.2.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.2.0)
+    rspec-mocks (3.2.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.2.0)
+    rspec-support (3.2.2)
 
 PLATFORMS
   ruby
@@ -15,3 +29,4 @@ PLATFORMS
 DEPENDENCIES
   codebreaker!
   rack
+  rspec
