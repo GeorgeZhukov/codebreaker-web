@@ -270,15 +270,15 @@ function show_logo() {
   }).translate({
     from: { x: 0, y: 0 },
     to: { x: -logoCenterX, y: -logoCenterY },
-    duration: 2000,
+    duration: 1000,
     delay: 2000,
     bounces: 3
   }).scale({
     from: { x: 1, y: 1 },
-    to: { x: 0.7, y: 0.7 },
-    duration: 2000,
+    to: { x: 0.6, y: 0.6 },
+    duration: 1000,
     delay: 2000,
-    bounces: 10
+    bounces: 14
   });
   
   var logo = $("#logo");
