@@ -19,5 +19,10 @@ The Cloud9 IDE team
 
 Codebreaker
 ===========
-Web interface written on Rake for code breaker (https://github.com/GeorgeZhukov/codebreaker "gem")
+Web interface written on Rake for code breaker gem (https://github.com/GeorgeZhukov/codebreaker)
+
+
+Demo
+----
+https://codebreaker-web.herokuapp.com/
 
