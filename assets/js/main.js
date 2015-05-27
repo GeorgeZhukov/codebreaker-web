@@ -158,7 +158,7 @@ function show_score_table(collection_html){
 
 // TODO: refactor this function
 function add_to_guess(number) {
-
+  button_click_sound.play();
   guess += number.toString();
   update_guess_code();
   
@@ -225,7 +225,6 @@ function init_buttons(){
     var buttonId = $(this).attr("id");
 
     if (/[\d]$/.test(buttonId)) {
-      button_click_sound.play();
       buttonNumber = buttonId.slice(-1);
       add_to_guess(buttonNumber);
     }else{
@@ -357,7 +356,7 @@ function hide_saul() {
   });
 }
 
-// For cheat
+// Key handler
 $(document).on("keypress", function (e) {
   var key = String.fromCharCode(e.which);
   list_of_pressed_keys += key;
