@@ -14,12 +14,11 @@ function update_guess_code() {
   guess_code_label.textContent = guess_to_output;
 }
 
-function set_available_attempts(attempts) {
-  if(attempts.toString().length > 2){
-    return false;
-  }
+function decrease_available_attempts() {
   var available_attempts_label = $("#safe").contents().find("#available_x5F_attempts")[0];
-  available_attempts_label.textContent = attempts;
+  var attempts = parseInt(available_attempts_label.textContent);
+  --attempts;
+  available_attempts_label.textContent = attempts.toString();
 }
 
 function set_codebreaker_result(result){
@@ -114,6 +113,13 @@ function show_save_score_popup(){
       if(data === false){
         return start_new_game();
       }
+
+      if(!/^[a-zA-Z0-9]{3,8}$/.test(data)){
+        return vex.dialog.alert({
+          message: "Username should contains only letters and digits",
+          callback: show_save_score_popup
+        })
+      }
       save_score(data);
     }
   });
@@ -138,10 +144,12 @@ function show_score_table(collection_html){
 
 // TODO: refactor this function
 function add_to_guess(number) {
+
   guess += number.toString();
   update_guess_code();
   
   if (guess.length == 4) {
+    decrease_available_attempts();
     
     $.ajax({
       url: "/guess/" + guess,
@@ -272,7 +280,7 @@ function show_safe() {
   
   safe.show();
   return bounce.applyTo(safe).then(function(){
-    init_buttons();
+    init_buttons();    
   });
 }
 
