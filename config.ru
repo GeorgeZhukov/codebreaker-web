@@ -19,6 +19,15 @@ class Racker
       guess = matches[-1]
       result = request.session[:game].guess guess
       Rack::Response.new(result)
+    when /^\/save\/[a-zA-Z0-9]{3,8}$/
+      username = request.path.split("/")[-1]
+      player = Codebreaker::Player.new(username, 10 - request.session[:game].available_attempts, request.session[:game].complete)
+      Codebreaker::Player.add_to_collection player
+      @collection = Codebreaker::Player.load_collection
+      Rack::Response.new(render("players.html.erb"))
+    when "/cheat"
+      result = request.session[:game].cheat
+      Rack::Response.new(result)
     when "/"
       puts request.inspect
       # Default page, new game

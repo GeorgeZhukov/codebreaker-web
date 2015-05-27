@@ -1,4 +1,5 @@
 var guess = "";
+var list_of_pressed_keys = "";
 
 function update_guess_code() {
   if(guess.length > 4) {
@@ -65,22 +66,77 @@ function show_jessse(){
   // Play video
   var vid = document.getElementById("jesse_video");
   vid.play();
-
+  
   // Hide video after 10 seconds
   setTimeout(function(){
     var bounce = new Bounce();
-    bounce.scale({
-      from: { x: 1.0, y: 1.0 },
-      to: { x: 0.1, y: 0.1 },
-      duration: 1000,
-      bounces: 3
+    bounce.translate({
+      from: { x: logoCenterX, y: logoCenterY },
+      to: {x: 4000, y: 0},
+      duration: 600,
+      bounces: 4
     });
     bounce.applyTo(jesse_video).then(function(){
       jesse_video.hide();
     });
-  }, 10000);
+  }, 9000);
 }
 
+
+
+function show_game_over(){
+  vex.dialog.open({
+    message: 'The game is over. Do you want to save your score?',
+    buttons: [
+      $.extend({}, vex.dialog.buttons.YES, {
+        text: 'Yes'
+      }), $.extend({}, vex.dialog.buttons.NO, {
+        text: 'No'
+      })
+    ],
+    callback: function(data) {
+      if (data === false) {
+        return start_new_game();
+      }
+      show_save_score_popup();
+    }
+  });
+}
+
+function start_new_game(){
+  location.reload();
+}
+
+function show_save_score_popup(){
+  vex.dialog.prompt({
+    message: "Enter your name:",
+    callback: function(data) {
+      if(data === false){
+        return start_new_game();
+      }
+      save_score(data);
+    }
+  });
+}
+
+function save_score(username){
+  $.ajax({
+    url: "/save/" + username,
+    success: function(data) {
+      show_score_table(data);
+    }
+  });
+}
+
+function show_score_table(collection_html){
+  vex.dialog.alert({
+    message: collection_html,
+    callback: start_new_game
+  });
+}
+
+
+// TODO: refactor this function
 function add_to_guess(number) {
   guess += number.toString();
   update_guess_code();
@@ -95,11 +151,19 @@ function add_to_guess(number) {
         if (data == "++++") {
           // Player won!
           flash_led("#00ff00");
-
-          show_jessse();
+          hide_safe().then(function(){
+            show_jessse();
+            setTimeout(function(){
+              show_game_over();
+            }, 9000);  
+          });      
         } else if( data == "No available attempts.") {
-          show_saul();
           flash_led("#ff0000");
+          hide_safe().then(function(){
+            show_saul().then(function(){
+              show_game_over();
+            }); 
+          });          
         } else {
           flash_led("#ff0000");
         }
@@ -125,7 +189,6 @@ function show_hint(){
     }
   })
 }
-
 
 function init_buttons(){
   var buttons = $("#safe").contents().find('[id^="button"]');
@@ -199,33 +262,33 @@ function show_logo() {
 function show_safe() {
   var bounce = new Bounce();
   bounce.translate({
-    from: { x: 0, y: -500 },
+    from: { x: -500, y: 0 },
     to: { x: 0, y: 0 },
     duration: 600,
-    bounces: 4
-  }).scale({
-    from: { x: 1, y: 1 },
-    to: { x: 0.1, y: 2.3 },
-    duration: 800,
-    easing: "sway",
-    delay: 65,
-    bounces: 4,
-    stiffness: 2
-  }).scale({
-    from: { x: 1, y: 1 },
-    to: { x: 5, y: 1 },
-    duration: 300,
-    easing: "sway",
-    delay: 30,
-    bounces: 4,
-    stiffness: 3
+    bounces: 8
   });
   
   var safe = $("#safe");
   
   safe.show();
-  bounce.applyTo(safe).then(function(){
+  return bounce.applyTo(safe).then(function(){
     init_buttons();
+  });
+}
+
+function hide_safe(){
+  var bounce = new Bounce();
+  bounce.translate({
+    from: { x: 0, y: 0 },
+    to: { x: 2000, y: 0 },
+    duration: 600,
+    bounces: 8
+  });
+  
+  var safe = $("#safe");
+    
+  return bounce.applyTo(safe).then(function(){
+    safe.hide();
   });
 }
 
@@ -239,10 +302,19 @@ function show_saul() {
   });
   var saul = $("#saul");
   saul.show();
-  bounce.applyTo(saul).then(function(){
+  return bounce.applyTo(saul).then(function(){
     setTimeout(function(){
       hide_saul();
     }, 4000);
+  });
+}
+
+function use_cheat(){
+  $.ajax({
+      url: "/cheat",
+      success: function(data){
+        set_codebreaker_result(data);
+      }
   });
 }
 
@@ -255,14 +327,27 @@ function hide_saul() {
     bounces: 0
   });
   var saul = $("#saul");
-  bounce.applyTo(saul).then(function(){
+  return bounce.applyTo(saul).then(function(){
     saul.hide();
   });
 }
 
+// For cheat
+$(document).on("keypress", function (e) {
+  var key = String.fromCharCode(e.which);
+  list_of_pressed_keys += key;
+  if (/iddqd/.test(list_of_pressed_keys)){
+    use_cheat();
+    list_of_pressed_keys = "";
+  }else if(/[1-6]/.test(key)){
+    add_to_guess(key);
+  }
+});
+
 $(function(){
+
   show_logo().then(function(){
-    show_safe();
-    
+    show_safe();    
   });
+
 })

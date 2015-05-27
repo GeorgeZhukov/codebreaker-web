@@ -1,7 +1,8 @@
 body {
-    background-color: #242424;
-    font-family: source-sans-pro, Helvetica, Arial, sans-serif, sans-serif;
-    overflow-x: hidden;
+  background: url('http://images6.alphacoders.com/321/321927.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: source-sans-pro, Helvetica, Arial, sans-serif, sans-serif;
+  overflow-x: hidden;
 }
 
 #top_menu {

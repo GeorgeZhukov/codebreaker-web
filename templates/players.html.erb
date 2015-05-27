@@ -1,0 +1,20 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Username</th>
+      <th>Attempts</th>
+      <th>Complete</th>
+    </tr>
+  </thead>
+  <tbody>
+  	<% @collection.each_with_index do |player,index| %>
+        <tr>
+          <th scope="row"><%= index+1 %></th>
+          <td><%= player.username %></td>
+          <td><%= player.attempts %></td>
+          <td><%= player.complete %></td>
+        </tr>
+    <% end %>        
+   </tbody> 
+</table>
