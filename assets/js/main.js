@@ -1,6 +1,20 @@
 var guess = "";
 var list_of_pressed_keys = "";
 
+// Sound effects
+var button_click_sound = new Howl({
+  urls: ['assets/audios/button_click.mp3']
+});
+
+var alarm_wrong_code_sound = new Howl({
+  urls: ['assets/audios/alarm_wrong_code.mp3']
+});
+
+var alarm_perpetrator_sound = new Howl({
+  urls: ['assets/audios/alarm_perpetrator.mp3']
+});
+
+
 function update_guess_code() {
   if(guess.length > 4) {
     // The user too often press the buttons
@@ -167,6 +181,7 @@ function add_to_guess(number) {
           });      
         } else if( data == "No available attempts.") {
           flash_led("#ff0000");
+          alarm_perpetrator_sound.play();
           hide_safe().then(function(){
             show_saul().then(function(){
               show_game_over();
@@ -174,6 +189,7 @@ function add_to_guess(number) {
           });          
         } else {
           flash_led("#ff0000");
+          alarm_wrong_code_sound.play();
         }
 
         // Clear string
@@ -207,8 +223,9 @@ function init_buttons(){
   
   buttons.on("click", function(o){
     var buttonId = $(this).attr("id");
-    
+
     if (/[\d]$/.test(buttonId)) {
+      button_click_sound.play();
       buttonNumber = buttonId.slice(-1);
       add_to_guess(buttonNumber);
     }else{
