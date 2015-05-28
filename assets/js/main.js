@@ -4,17 +4,17 @@ var list_of_pressed_keys = "";
 // Sound effects
 var button_click_sound = new Howl({
   urls: ['assets/audios/button_click.mp3'],
-  volume: 0.6
+  volume: 0.5
 });
 
 var alarm_wrong_code_sound = new Howl({
   urls: ['assets/audios/alarm_wrong_code.mp3'],
-  volume: 0.6
+  volume: 0.5
 });
 
 var alarm_perpetrator_sound = new Howl({
   urls: ['assets/audios/alarm_perpetrator.mp3'],
-  volume: 0.6
+  volume: 0.3
 });
 
 
