@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/GeorgeZhukov/codebreaker.git
-  revision: f8639356cf362d631626beaef35fd86fd9d1a021
+  revision: 58849f7d3fbdf6898c86ce0c09c30e8e594aba4a
   specs:
     codebreaker (0.1.0)
 
@@ -30,3 +30,6 @@ DEPENDENCIES
   codebreaker!
   rack
   rspec
+
+BUNDLED WITH
+   1.10.0
