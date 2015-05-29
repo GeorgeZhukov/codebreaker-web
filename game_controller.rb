@@ -36,7 +36,7 @@ class GameController
 
   def save_score
     username = @request.path.split("/")[-1]
-    player = Codebreaker::Player.new(username, 10 - @game.available_attempts, @game.complete)
+    player = Codebreaker::Player.new(username, Codebreaker::Game::GIVEN_ATTEMPTS - @game.available_attempts, @game.complete)
     Codebreaker::Player.add_to_collection player
     @collection = Codebreaker::Player.load_collection
     render_to_template("players.html.erb")
