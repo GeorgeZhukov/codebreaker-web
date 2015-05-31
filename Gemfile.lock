@@ -30,3 +30,6 @@ DEPENDENCIES
   codebreaker!
   rack
   rspec
+
+BUNDLED WITH
+   1.10.0
