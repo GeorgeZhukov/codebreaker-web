@@ -87,12 +87,12 @@ function show_jessse() {
     });
 
     jesse_video.show();
-    bounce.applyTo(jesse_video);
-
-    // Play video
-    var vid = document.getElementById("jesse_video");
-    vid.play();
-
+    bounce.applyTo(jesse_video).then(function(){
+        // Play video
+        var vid = document.getElementById("jesse_video");
+        vid.play();
+    });
+    
     // Hide video after 10 seconds
     setTimeout(function () {
         var bounce = new Bounce();
