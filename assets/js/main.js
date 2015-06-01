@@ -14,7 +14,7 @@ var alarm_wrong_code_sound = new Howl({
 });
 
 var alarm_perpetrator_sound = new Howl({
-    urls: ['assets/audios/alarm_perpetrator.mp3'],
+    urls: ['assets/audios/police_siren.mp3'],
     volume: 0.3
 });
 
@@ -194,6 +194,7 @@ function add_to_guess(number) {
                 } else if (data == "No available attempts.") {
                     flash_led("#ff0000");
                     alarm_perpetrator_sound.play();
+                    alarm_perpetrator_sound.pos(4);
                     hide_safe().then(function () {
                         show_saul().then(function () {
                             show_game_over();
