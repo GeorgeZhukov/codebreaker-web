@@ -1,3 +1,4 @@
+[![Circle CI](https://circleci.com/gh/GeorgeZhukov/codebreaker-web.svg?style=svg)](https://circleci.com/gh/GeorgeZhukov/codebreaker-web)
 
      ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
     '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
