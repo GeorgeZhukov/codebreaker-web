@@ -1,5 +1,3 @@
-[![Circle CI](https://circleci.com/gh/GeorgeZhukov/codebreaker-web.svg?style=svg)](https://circleci.com/gh/GeorgeZhukov/codebreaker-web)
-
      ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
     '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
     |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
@@ -20,6 +18,7 @@ The Cloud9 IDE team
 
 Codebreaker
 ===========
+[![Circle CI](https://circleci.com/gh/GeorgeZhukov/codebreaker-web.svg?style=svg)](https://circleci.com/gh/GeorgeZhukov/codebreaker-web)
 Web interface written with Rake for code breaker gem (https://github.com/GeorgeZhukov/codebreaker)
 
 
