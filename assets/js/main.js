@@ -144,7 +144,7 @@ function show_save_score_popup() {
                 return vex.dialog.alert({
                     message: "Username should contains only letters and digits",
                     callback: show_save_score_popup
-                })
+                });
             }
             save_score(data);
         }
@@ -174,7 +174,7 @@ function add_to_guess(number) {
     guess += number.toString();
     update_guess_code();
 
-    if (guess.length == 4) {
+    if (guess.length === 4) {
         decrease_available_attempts();
 
         $.ajax({
@@ -182,7 +182,7 @@ function add_to_guess(number) {
             success: function (data) {
                 set_codebreaker_result(data);
 
-                if (data == "++++") {
+                if (data === "++++") {
                     // Player won!
                     flash_led("#00ff00");
                     hide_safe().then(function () {
@@ -191,7 +191,7 @@ function add_to_guess(number) {
                             show_game_over();
                         }, 9000);
                     });
-                } else if (data == "No available attempts.") {
+                } else if (data === "No available attempts.") {
                     flash_led("#ff0000");
                     alarm_perpetrator_sound.play();
                     alarm_perpetrator_sound.pos(4);
@@ -224,7 +224,7 @@ function show_hint() {
         success: function (data) {
             set_codebreaker_result(data);
         }
-    })
+    });
 }
 
 function init_buttons() {
@@ -234,11 +234,11 @@ function init_buttons() {
     buttons.css("cursor", "pointer");
     buttons.css("display", "block");
 
-    buttons.on("click", function (o) {
+    buttons.on("click", function () {
         var buttonId = $(this).attr("id");
 
         if (/[\d]$/.test(buttonId)) {
-            buttonNumber = buttonId.slice(-1);
+            var buttonNumber = buttonId.slice(-1);
             add_to_guess(buttonNumber);
         } else {
             // Seems hint button was pressed
@@ -387,4 +387,4 @@ $(function () {
         show_safe();
     });
 
-})
+});
