@@ -1,0 +1,8 @@
+# Save as .codeclimate.yml (note leading .) in project root directory
+languages:
+  Ruby: true
+  JavaScript: false # now main.js have a little troubles
+  PHP: false
+  Python: false
+# exclude_paths:
+# - "foo/bar.rb"
