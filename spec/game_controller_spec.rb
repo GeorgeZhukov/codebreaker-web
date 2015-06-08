@@ -133,6 +133,14 @@ describe GameController do
 
 		end
 	end
+  
+  describe "#render" do
+    it "create Rack::Response with given data" do
+      game_controller = GameController.new
+      expect(Rack::Response).to receive(:new).with("data")
+      game_controller.render("data")
+    end
+  end
 
 	describe "#render_to_template" do
 		it "calls render" do
