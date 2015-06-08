@@ -7,6 +7,8 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    codeclimate-test-reporter (0.4.7)
+      simplecov (>= 0.7.1, < 1.0.0)
     diff-lcs (1.2.5)
     docile (1.1.5)
     json (1.8.3)
@@ -35,6 +37,7 @@ PLATFORMS
 
 DEPENDENCIES
   codebreaker!
+  codeclimate-test-reporter
   rack
   rspec
   simplecov

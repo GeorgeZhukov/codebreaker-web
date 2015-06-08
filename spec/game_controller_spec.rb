@@ -1,5 +1,6 @@
 require 'spec_helper'
 require_relative '../game_controller'
+require 'rack'
 
 describe GameController do
 	before do
@@ -28,6 +29,40 @@ describe GameController do
 			subject.hint
 		end
 	end
+  
+  describe "#call" do
+        
+    before do
+      # allow_any_instance_of(Rack::Request).to receive
+      @request = double("Rack request")
+
+      allow(Rack::Request).to receive(:new).and_return(@request)
+      allow(@request).to receive(:session).and_return({})
+    end
+    
+    routes = {
+      '/hint' => :hint,
+      '/guess/1234' => :guess,
+      '/save/George' => :save_score,
+      '/cheat' => :cheat,
+      '/' => :new_game,
+    }
+    
+    routes.each do |url,method|
+      it "calls ##{method} when path is '#{url}'" do
+        allow(@request).to receive(:path).and_return(url)
+        expect(subject).to receive(method).once
+        subject.call({})
+      end
+    end
+    
+    it "create Rack::Response 404 when path is wrong" do
+      allow(@request).to receive(:path).and_return('/some-wrong-url')
+      expect(Rack::Response).to receive(:new).with("Not Found", 404).once
+      subject.call({})
+    end
+      
+  end
 
 	describe "#new_game" do
 		it "create a new game object" do
