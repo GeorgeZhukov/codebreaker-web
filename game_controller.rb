@@ -91,25 +91,19 @@ class GameController
     ['Not Found', 404]
   end
 
-  def redirect_to_google
-    [302, { 'Location' => 'http://google.com' }, []]
-  end
-
   def dispatch
     result =
-      case @request.path
+      case path
       when '/hint'
         hint
-      when %r(/^\/guess\/[1-6]{4}$/)
+      when %r{^\/guess\/[1-6]{4}$}
         guess
-      when %r(/^\/save\/[a-zA-Z0-9]{3,8}$/)
+      when %r{^\/save\/[a-zA-Z0-9]{3,8}$}
         save_score
       when '/cheat'
         cheat
       when '/'
         new_game
-      when '/trash'
-        return Rack::Response.new.redirect(redirect_to_google)
       else
         not_found
       end
@@ -117,8 +111,10 @@ class GameController
   end
 
   def init_game(force_new = false)
-    # binding.pry
-    @game = force_new && Codebreaker::Game.new
-    @game ||= Codebreaker::Game.new
+    if force_new
+      @request.session[:game] = Codebreaker::Game.new
+    end
+    @request.session[:game] ||= Codebreaker::Game.new
+    @game = @request.session[:game]
   end
 end
