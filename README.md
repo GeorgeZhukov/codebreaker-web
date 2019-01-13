@@ -10,3 +10,8 @@ Web interface written with Rake for code breaker gem (https://github.com/GeorgeZ
 Demo
 ----
 https://codebreaker-web.herokuapp.com/
+
+
+TO RUN:
+---
+bundle exec rackup config.ru
