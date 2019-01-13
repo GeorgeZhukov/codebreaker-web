@@ -7,6 +7,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    circleci (2.0.2)
     codeclimate-test-reporter (1.0.7)
       simplecov
     diff-lcs (1.3)
@@ -36,6 +37,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  circleci
   codebreaker!
   codeclimate-test-reporter
   rack
