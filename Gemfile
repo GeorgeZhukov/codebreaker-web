@@ -6,5 +6,3 @@ gem 'codebreaker', git: 'https://github.com/GeorgeZhukov/codebreaker.git'
 gem 'rack'
 gem 'simplecov', require: false, group: :test
 gem 'codeclimate-test-reporter', group: :test, require: nil
-gem 'pry'
-gem 'rubocop', '~> 0.39.0'

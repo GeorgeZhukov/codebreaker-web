@@ -1,6 +1,5 @@
 require 'erb'
 require 'codebreaker'
-require 'pry'
 
 # This is the main class for codebreaker game
 class GameController
